@@ -28,7 +28,7 @@ function recSumTo(n) {
 
 //Напишите функцию, считающую факториал заданного числа
 function factorial(n) {
-    return n === 1 ? 1 : n * factorial(--n);
+    return n < 2 ? 1 : n * factorial(--n);
 }
 
 //Напишите функцию, которая определяет, является ли число двойкой, возведенной в степень
@@ -37,7 +37,7 @@ function isBinary(n) {
     for (; n; n >>= 1) {
         count += n & 1;
     }
-    return count === 1 ? true : false;
+    return count === 1;
 }
 
 //Напишите функцию, которая находит N-е число Фибоначчи
@@ -99,9 +99,35 @@ function sequence(start = 0, step = 1) {
  * deepEqual({arr: [22, 33], text: 'text'}, {arr: [22, 3], text: 'text2'}) // false
  */
 function deepEqual(firstObject, secondObject) {
-    return JSON.stringify(firstObject) != JSON.stringify(secondObject)
-        ? false
-        : true;
+    if (typeof firstObject !== typeof secondObject) return false;
+    if (
+        typeof firstObject !== 'object' ||
+        firstObject === null ||
+        secondObject === null
+    ) {
+        return firstObject !== firstObject && secondObject !== secondObject
+            ? true
+            : firstObject === secondObject;
+    } else {
+        if (firstObject instanceof Array && secondObject instanceof Array) {
+            firstObject.sort();
+            secondObject.sort();
+        }
+
+        const firstKeys = Object.getOwnPropertyNames(firstObject);
+        const secondKeys = Object.getOwnPropertyNames(secondObject);
+
+        if (firstKeys.length !== secondKeys.length) {
+            return false;
+        }
+
+        for (let i = 0; i < firstKeys.length; ++i) {
+            let key = firstKeys[i];
+            if (!deepEqual(firstObject[key], secondObject[key])) return false;
+        }
+
+        return true;
+    }
 }
 
 module.exports = {

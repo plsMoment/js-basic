@@ -37,7 +37,7 @@ function isBinary(n) {
     for (; n; n >>= 1) {
         count += n & 1;
     }
-    return count === 1 ? true : false;
+    return count === 1;
 }
 
 //Напишите функцию, которая находит N-е число Фибоначчи

@@ -122,8 +122,8 @@ function deepEqual(firstObject, secondObject) {
         }
 
         for (let i = 0; i < firstKeys.length; ++i) {
-            let prop = firstKeys[i];
-            if (!deepEqual(firstObject[prop], secondObject[prop])) return false;
+            let key = firstKeys[i];
+            if (!deepEqual(firstObject[key], secondObject[key])) return false;
         }
 
         return true;

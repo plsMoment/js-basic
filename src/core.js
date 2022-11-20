@@ -109,11 +109,6 @@ function deepEqual(firstObject, secondObject) {
             ? true
             : firstObject === secondObject;
     } else {
-        if (firstObject instanceof Array && secondObject instanceof Array) {
-            firstObject.sort();
-            secondObject.sort();
-        }
-
         const firstKeys = Object.getOwnPropertyNames(firstObject);
         const secondKeys = Object.getOwnPropertyNames(secondObject);
 
